@@ -7,4 +7,6 @@ fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
 }).catch((error)=>{
     console.error(error);
     jsonProduits = [];
-})
+});
+
+console.log(jsonProduits);
