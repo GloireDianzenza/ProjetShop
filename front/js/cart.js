@@ -137,3 +137,58 @@ setInterval(()=>{
         if(inp.value == "")inp.value = "1";
     });
 },100);
+
+/**
+ * 
+ */
+order.addEventListener("click",(event)=>{
+    event.preventDefault();
+    if(firstName.value.trim()==="")return;
+    else if(lastName.value.trim()==="")return;
+    else if(address.value.trim()==="")return;
+    else if(city.value.trim()==="")return;
+    else if(email.value.trim()=="")return;
+    else if(!email.value.includes("@") || email.value.split("@").length != 2 || email.value.split("@")[1] == "" || validateEmail(email.value) == null){
+        emailErrorMsg.innerHTML = "Incorrect email format !";
+        return;
+    }
+    console.log();
+    emailErrorMsg.innerHTML = "";
+    let fn = firstName.value;
+    let ln = lastName.value;
+    let add = address.value;
+    let town = city.value;
+    let mail = email.value;
+
+    let contact = {
+        firstName:fn,
+        lastName:ln,
+        address:add,
+        city:town,
+        email:mail
+    }
+
+    let array = JSON.parse(localStorage.getItem("array"));
+    let arrayProducts = array.map((item)=>item.id);
+
+    fetch("http://localhost:3000/api/products/order",{
+        method:"POST",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(contact)
+    }).then(response=>response.json()).then(data=>{
+        console.log(data);
+    }).catch(error=>{
+        console.error("error",error);
+    })
+
+})
+
+const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
