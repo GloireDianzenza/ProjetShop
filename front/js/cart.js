@@ -48,11 +48,36 @@ fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
         numberInput.min = "1"
         numberInput.max = "100";
         numberInput.value = item.quantity.toString();
+
+        numberInput.addEventListener("change",()=>{
+            let value = numberInput.value;
+            let currentArticle = numberInput.closest("article");
+            let id = currentArticle.getAttribute("data-id");
+            let color = currentArticle.getAttribute("data-color");
+            let array = JSON.parse(localStorage.getItem("array"));
+            let test = array.filter((item)=>item.id == id && item.color == color);
+            test[0].quantity = value;
+            let index = array.indexOf(test[0]);
+            array[index] = test[0];
+            localStorage.setItem("array",JSON.stringify(array));
+        })
+
         quantityDiv.innerHTML = "Quantité: ";
 
         let deleteItem = document.createElement("p");
         deleteItem.classList.add("deleteItem");
         deleteItem.innerHTML = "Supprimer";
+        deleteItem.addEventListener("click",()=>{
+            let currentArticle = deleteItem.closest("article");
+            let id = currentArticle.getAttribute("data-id");
+            let color = currentArticle.getAttribute("data-color");
+            let array = JSON.parse(localStorage.getItem("array"));
+            let test = array.filter((item)=>item.id == id && item.color == color);
+            let index = array.indexOf(test[0]);
+            array.splice(index,1);
+            localStorage.setItem("array",JSON.stringify(array));
+            currentArticle.remove();
+        })
 
         settingsDelete.appendChild(deleteItem);
         settingsQuantity.appendChild(quantityDiv);

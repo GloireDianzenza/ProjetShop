@@ -72,6 +72,7 @@ function arrayContains(obj){
     let index = 0;
     for(let item of list){
         if(item.id == obj.id && item.color == obj.color)return index;
+        index++;
     }
     return -1;
 }
