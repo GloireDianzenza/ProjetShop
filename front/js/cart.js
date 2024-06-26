@@ -176,7 +176,7 @@ order.addEventListener("click",(event)=>{
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify(contact)
+        body: JSON.stringify([contact,arrayProducts])
     }).then(response=>response.json()).then(data=>{
         console.log(data);
     }).catch(error=>{
