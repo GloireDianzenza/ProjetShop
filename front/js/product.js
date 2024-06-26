@@ -13,5 +13,5 @@ fetch(linkProduit).then(response=>response.json()).then((data)=>{
 }).catch((error)=>{
     console.error("error",error);
     currentProduct = null;
-    console.log(currentProduct);
+    window.location = window.location.origin+"/front/html";
 });
