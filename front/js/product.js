@@ -7,7 +7,7 @@ const linkProduit = "http://localhost:3000/api/products/"+id;
 
 let currentProduct;
 
-fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
+fetch(linkProduit).then(response=>response.json()).then((data)=>{
     currentProduct = data;
     console.log(currentProduct);
 }).catch((error)=>{
