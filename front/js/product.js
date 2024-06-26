@@ -21,7 +21,6 @@ fetch(linkProduit).then(response=>response.json()).then((data)=>{
     document.querySelector(".item__content__description #description").innerHTML = currentProduct.description;
 
     for(let color of currentProduct.colors){
-        console.log(color);
 
         let option = document.createElement("option");
         option.value = color;
