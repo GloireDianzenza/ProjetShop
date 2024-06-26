@@ -31,15 +31,47 @@ fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
         article.appendChild(contentDiv);
 
         let contentDesc = document.createElement("div");
+        let contentSettings = document.createElement("div");
         contentDesc.classList.add("cart__item__content__description");
+        contentSettings.classList.add("cart__item__content__settings");
+
+        let settingsQuantity = document.createElement("div");
+        let settingsDelete = document.createElement("div");
+        settingsQuantity.classList.add("cart__item__content__settings__quantity");
+        settingsDelete.classList.add("cart__item__content__settings__delete");
+
+        let quantityDiv = document.createElement("p");
+        let numberInput = document.createElement("input");
+        numberInput.type = "number";
+        numberInput.classList.add("itemQuantity");
+        numberInput.name = "itemQuantity";
+        numberInput.min = "1"
+        numberInput.max = "100";
+        numberInput.value = item.quantity.toString();
+        quantityDiv.innerHTML = "Quantité: ";
+
+        let deleteItem = document.createElement("p");
+        deleteItem.classList.add("deleteItem");
+        deleteItem.innerHTML = "Supprimer";
+
+        settingsDelete.appendChild(deleteItem);
+        settingsQuantity.appendChild(quantityDiv);
+        settingsQuantity.appendChild(numberInput);
+        contentSettings.appendChild(settingsQuantity);
+        contentSettings.appendChild(settingsDelete);
 
         let productName = document.createElement("h2");
         let productColor = document.createElement("p");
         let productPrice = document.createElement("p");
         productName.innerHTML = product.name;
         productColor.innerHTML = item.color;
+        product.price = product.price.toString();
         if(product.price.length % 2 == 0){
-            let index1 = product.price.length / 2 - 1;
+            let index1 = product.price.length / 2;
+            product.price = product.price.slice(0,index1)+","+product.price.slice(index1);
+        }
+        else{
+            let index1 = parseInt(product.price.length / 2) + 1;
             product.price = product.price.slice(0,index1)+","+product.price.slice(index1);
         }
         productPrice.innerHTML = product.price+" €";
@@ -48,6 +80,7 @@ fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
         contentDesc.appendChild(productPrice);
 
         contentDiv.appendChild(contentDesc);
+        contentDiv.appendChild(contentSettings);
 
         cartItems.appendChild(article);
         index++;
@@ -73,3 +106,9 @@ function getProductFromID(products,id){
     }
     return {};
 }
+
+setInterval(()=>{
+    document.querySelectorAll("input[type=number]").forEach(inp=>{
+        if(inp.value == "")inp.value = "1";
+    });
+},100);
