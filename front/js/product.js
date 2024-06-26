@@ -11,6 +11,7 @@ fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
     jsonProduits = data;
     let prods = jsonProduits.filter((product)=>product._id == id);
     currentProduct = prods[0];
+    console.log(currentProduct);
 }).catch((error)=>{
     console.error("error",error);
     jsonProduits = [];
