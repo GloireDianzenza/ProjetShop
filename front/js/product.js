@@ -1,7 +1,7 @@
 const link = new URL(window.location.href);
-const searchParam = link.searchParams;
+const searchParam = new URLSearchParams(link.search);
 const id = searchParam.get("id");
-if(id == null)window.location = window.location.origin+"/front/html";
+if(!searchParam.has("id"))window.location = window.location.origin+"/front/html";
 
 const linkEnsembleProduits = "http://localhost:3000/api/products/";
 
