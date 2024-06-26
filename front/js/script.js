@@ -38,3 +38,4 @@ fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
     items.innerHTML = "";
 });
 
+console.log(localStorage);

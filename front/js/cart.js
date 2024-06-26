@@ -4,7 +4,6 @@ let jsonProduits;
 
 fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
     jsonProduits = data;
-    jsonProduits = jsonProduits.filter((product)=>localStorage.getItem(product._id) !== null);
     console.log(jsonProduits);
 }).catch((error)=>{
     console.error("error",error);
