@@ -10,6 +10,25 @@ let currentProduct;
 fetch(linkProduit).then(response=>response.json()).then((data)=>{
     currentProduct = data;
     console.log(currentProduct);
+    
+    let imgDiv = document.createElement("img");
+    imgDiv.alt = currentProduct.altTxt;
+    imgDiv.src = currentProduct.imageUrl;
+    document.querySelector(".item__img").appendChild(imgDiv);
+
+    document.querySelector(".item__content__titlePrice #title").innerHTML = currentProduct.name;
+    document.querySelector(".item__content__titlePrice #price").innerHTML = currentProduct.price;
+    document.querySelector(".item__content__description #description").innerHTML = currentProduct.description;
+
+    for(let color of currentProduct.colors){
+        console.log(color);
+
+        let option = document.createElement("option");
+        option.value = color;
+        option.innerHTML = color;
+
+        colors.appendChild(option);
+    }
 }).catch((error)=>{
     console.error("error",error);
     currentProduct = null;
