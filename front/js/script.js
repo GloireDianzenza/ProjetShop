@@ -3,6 +3,7 @@ const linkEnsembleProduits = "http://localhost:3000/api/products/";
 let jsonProduits;
 if(localStorage.getItem("array") == null || localStorage.getItem("array") == undefined)localStorage.setItem("array",JSON.stringify([]));
 
+
 fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
     jsonProduits = data;
     console.log(jsonProduits);
