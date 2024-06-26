@@ -1,4 +1,4 @@
-const linkEnsembleProduits = "http://localhost:3000/api/productss/";
+const linkEnsembleProduits = "http://localhost:3000/api/products/";
 
 let jsonProduits;
 
