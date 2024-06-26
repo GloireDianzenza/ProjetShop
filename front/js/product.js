@@ -10,6 +10,7 @@ let jsonProduits,currentProduct;
 fetch(linkEnsembleProduits).then(response=>response.json()).then((data)=>{
     jsonProduits = data;
     let prods = jsonProduits.filter((product)=>product._id == id);
+    if(prods.length <= 0)window.location = window.location.origin+"/front/html";
     currentProduct = prods[0];
     console.log(currentProduct);
 }).catch((error)=>{
