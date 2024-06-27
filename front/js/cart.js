@@ -171,14 +171,19 @@ order.addEventListener("click",(event)=>{
     let array = JSON.parse(localStorage.getItem("array"));
     let arrayProducts = array.map((item)=>item.id);
 
+    let customerOrder = {contact:contact,products:arrayProducts};
+    console.log(customerOrder);
+
     fetch("http://localhost:3000/api/products/order",{
         method:"POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify([contact,arrayProducts])
+        body: JSON.stringify(customerOrder)
     }).then(response=>response.json()).then(data=>{
-        console.log(data);
+        let customOrder = data;
+        console.log(customOrder);
+        let orderID = customOrder.orderId;
     }).catch(error=>{
         console.error("error",error);
     })
