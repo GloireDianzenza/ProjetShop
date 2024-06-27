@@ -136,6 +136,16 @@ setInterval(()=>{
     document.querySelectorAll("input[type=number]").forEach(inp=>{
         if(inp.value == "")inp.value = "1";
     });
+    let array = JSON.parse(localStorage.getItem("array"));
+    totalQuantity.innerHTML = array.length;
+
+    let total = 0;
+    document.querySelectorAll(".cart__item .itemQuantity").forEach(item=>{
+        let price = item.closest(".cart__item__content").querySelector(".cart__item__content__description p:last-child").innerHTML.replace("€","").replace(",",".").trim();
+        price = parseFloat(price);
+        total += parseInt(item.value) * price;
+    })
+    totalPrice.innerHTML = total.toFixed(2).toString().replace(".",",");
 },100);
 
 /**
@@ -184,6 +194,8 @@ order.addEventListener("click",(event)=>{
         let customOrder = data;
         console.log(customOrder);
         let orderID = customOrder.orderId;
+
+        window.location = "./confirmation.html?orderID="+orderID;
     }).catch(error=>{
         console.error("error",error);
     })

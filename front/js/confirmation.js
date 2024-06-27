@@ -1,7 +1,8 @@
-let numbers = '0123456789';
-let orderNumber = "";
-for(let i = 0;i < 17;i++){
-    let index = Math.floor(Math.random()*numbers.length);
-    let num = numbers[index];
-    orderNumber += num;
-}
+const link = new URL(window.location.href);
+const searchParam = new URLSearchParams(link.search);
+const id = searchParam.get("orderID");
+if(!searchParam.has("orderID"))window.location = window.location.origin+"/front/html";
+
+console.log(id);
+
+orderId.innerHTML = id;
